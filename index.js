@@ -19,14 +19,27 @@ const app = express()
 //     next()
 // }
 
+//* SETTINGS
+app.set('appName', 'Juan Express Tutorial')
+app.set('port', '3000')
+app.set('view engine', 'ejs')
+
+
+//* MIDDLEWARES
 app.use(express.json())
 // app.use(logger);
 app.use(morgan('dev'))
 
+//* ROUTES
 // app.all('/user', (req, res, next) => {
 //     console.log('Por aqui paso')
 //     next()
 // })
+
+app.get('/', (req, res) => {
+    const data = [{name: "jon"}, {name: "carlos"}, {name: "juan"}, {name: "jasive"}]
+    res.render('index.ejs', {people: data})
+})
 
 app.get('/user', (req, res) => {
     res.json({
@@ -52,6 +65,7 @@ app.delete('/user/:id', (req, res) => {
 
 app.use(express.static('public'))
 
-app.listen(5000, () => {
-    console.log('Server on port 5000')
+app.listen(app.get('port'), () => {
+    console.log(app.get('appName'))
+    console.log(`Server on port ${app.get('port')}`)
 });
