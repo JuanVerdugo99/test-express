@@ -15,6 +15,10 @@ const app = express()
 
 app.use(express.json())
 
+function logger() {
+    console.log 
+}
+
 app.all('/user', (req, res, next) => {
     console.log('Por aqui paso')
     next()
