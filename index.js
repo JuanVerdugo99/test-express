@@ -11,18 +11,22 @@
 // })
 
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 
+// function logger(req, res, next) {
+//     console.log (`Route Received: ${req.protocol}://${req.get('host')}${req.originalUrl}`)
+//     next()
+// }
+
 app.use(express.json())
+// app.use(logger);
+app.use(morgan('dev'))
 
-function logger() {
-    console.log 
-}
-
-app.all('/user', (req, res, next) => {
-    console.log('Por aqui paso')
-    next()
-})
+// app.all('/user', (req, res, next) => {
+//     console.log('Por aqui paso')
+//     next()
+// })
 
 app.get('/user', (req, res) => {
     res.json({
